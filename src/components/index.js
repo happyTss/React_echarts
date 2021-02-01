@@ -527,18 +527,18 @@ export default function Echarts(props) {
       // 球
       // el.symbol = point
       // el.symbolSize = [30, 30];
-      el.label = {
-        normal: {
-          show: true,
-          position: "bottom",
-          borderWidth: 1,
-          borderRadius: 12,
-          padding: [4, 8, 4, 8],
-          distance: 10,
-          // color: "rgb(255,255,255)",
-          borderColor: "rgb(89,197,238)",
-        },
-      };
+      // el.label = {
+      //   normal: {
+      //     show: true,
+      //     position: "bottom",
+      //     borderWidth: 1,
+      //     borderRadius: 12,
+      //     padding: [4, 8, 4, 8],
+      //     distance: 10,
+      //     // color: "rgb(255,255,255)",
+      //     borderColor: "rgb(89,197,238)",
+      //   },
+      // };
       el.itemStyle = {
         borderColor: el.pointColor ? el.pointColor : 'rgba(4, 242, 28, 1)',
         borderWidth: 3,
