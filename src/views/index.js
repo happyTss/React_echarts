@@ -14,14 +14,14 @@ const Echarts = () => {
     name: "市监狱局",
     pointType: "point",
     belong: "南开区",
-    pointColor: 'rgba(217, 0, 27, 1)', // 球颜色
-    lineStyle: {
-      color: 'red', // 线颜色
-    },
-    effect: {
-      period: 2, // 箭头快慢
-      symbolSize: [6, 20], // 箭头大小
-    },
+    // pointColor: 'rgba(217, 0, 27, 1)', // 球颜色
+    // lineStyle: {
+    //   color: 'red', // 线颜色
+    // },
+    // effect: {
+    //   period: 2, // 箭头快慢
+    //   symbolSize: [6, 20], // 箭头大小
+    // },
   },
   {
     symbol: "",
@@ -40,6 +40,10 @@ const Echarts = () => {
     name: "河北区政府",
     pointType: "point",
     belong: "河北区",
+    label: {
+            show: true,
+            offset: [15, 10]
+        }
   },
   {
     symbol: "",
@@ -357,7 +361,7 @@ const Echarts = () => {
     pointType: "point",
     belong: "科技信息所",
     effect: {
-      period: 4,
+      // period: 4,
     },
   },
   {
@@ -490,7 +494,7 @@ const Echarts = () => {
     name: "科技信息所",
     pointType: "cloud",
     effect: {
-      period: 2,
+      // period: 2,
       // symbolSize: [8, 24],
     },
   },

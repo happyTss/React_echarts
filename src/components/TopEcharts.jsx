@@ -42,18 +42,18 @@ const  BottomEcharts = (props) => {
       // 球
       el.symbol = point
       el.symbolSize = [25, 25];
-      el.label = {
-        normal: {
-          show: true,
-          position: "bottom",
-          borderWidth: 1,
-          borderRadius: 12,
-          padding: [4, 8, 4, 8],
-          distance: 4,
-          color: "rgb(89,197,238)",
-          borderColor: "rgb(89,197,238)",
-        },
-      };
+      // el.label = {
+      //   normal: {
+      //     show: true,
+      //     position: "bottom",
+      //     borderWidth: 1,
+      //     borderRadius: 12,
+      //     padding: [4, 8, 4, 8],
+      //     distance: 4,
+      //     color: "rgb(89,197,238)",
+      //     borderColor: "rgb(89,197,238)",
+      //   },
+      // };
       el.itemStyle = {
         borderColor: el.pointColor ? el.pointColor : 'rgba(4, 242, 28, 1)',
         borderWidth: 3,
@@ -100,21 +100,44 @@ const  BottomEcharts = (props) => {
         } else if (x >= 0 && y < 0) {
           rotate = (-8 + angle * (arr.length * 0.25 - index -1)).toFixed(4);
         }
+        console.log('rotate :>> ', rotate);
+        if (0<rotate && rotate<90) {
+          console.log('222222222222222222')
+          rotate = rotate *0.1
+        }else if (-45 < rotate&& rotate < 0) {
+          console.log('11111111111')
+          rotate = - rotate * 2
+        }
         e.label = {
-          show: false,
-          width: 200,
-          color: {
-            lineColor: {
-              color: "rgb(24,163,239)",
-            },
+            normal: {
+            show: true,
+            position: "bottom",
+            // borderWidth: 1,
+            // borderRadius: 12,
+            padding: [4, 8, 4, 8],
+            distance: 4,
+            color: "rgb(89,197,238)",
+            borderColor: "rgb(89,197,238)",
+            // rotate: rotate*0.1,
+            rotate:rotate,
+            align: x > 0 ? 'left' : 'right',
+            padding: x > 0 ? [-20, 20, 0, 20] : [-40, 16, 0, 0],
           },
-          rotate,
-          align: x > 0 ? 'left' : 'right',
-          padding: x > 0 ? [0, 0, 0, 16] : [0, 16, 0, 0],
+          // show: true,
+          // width: 200,
+          // color: {
+          //   lineColor: {
+          //     color: "rgb(24,163,239)",
+          //   },
+          // },
+          // rotate:rotate*0.1,
+          // align: x > 0 ? 'left' : 'right',
+          // padding: x > 0 ? [-20, 20, 0, 20] : [-40, 16, 0, 0],
         };
       }
       newArray.push(e);
     });
+    console.log('newArray :>> ', newArray);
     return newArray;
   }
   // 线配置
