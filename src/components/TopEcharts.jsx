@@ -90,17 +90,12 @@ const  BottomEcharts = (props) => {
         // :TODO:角度需要重新计算
         let rotate = '0';
         const angle = (180 / arr.length).toFixed(4);
-        if (x==0) {
-          console.log('ang======', ang)
-          console.log('arr[index]', arr[index])
-        }
-        if (x > 0 ) {
-          rotate = (r - angle * (index-1)).toFixed(4);
-          // rotate = (90 - 360 / arr.length * (index + 1)).toFixed(4);
-        } else if (x <= 0 ) {
-          rotate = (-r + angle * (arr.length - index + 1)).toFixed(4);
-        } 
-        console.log('rotate :>> ', rotate);
+        // if (x > 0 ) {
+        //   rotate = (r - angle * (index-1)).toFixed(4);
+        //   // rotate = (90 - 360 / arr.length * (index + 1)).toFixed(4);
+        // } else if (x <= 0 ) {
+        //   rotate = (-r + angle * (arr.length - index + 1)).toFixed(4);
+        // } 
         e.label = {
             normal: {
             show: true,
@@ -116,21 +111,11 @@ const  BottomEcharts = (props) => {
             align: x > 0 ? 'left' : 'right',
             padding: x > 0 ? [-15, 13,0, 30] : [-15, 30, 10, 0],//
           },
-          // show: true,
-          // width: 200,
-          // color: {
-          //   lineColor: {
-          //     color: "rgb(24,163,239)",
-          //   },
-          // },
-          // rotate:rotate*0.1,
-          // align: x > 0 ? 'left' : 'right',
-          // padding: x > 0 ? [-20, 20, 0, 20] : [-40, 16, 0, 0],
         };
       }
       newArray.push(e);
     });
-    console.log('newArray :>> ', newArray);
+    // console.log('newArray :>> ', newArray);
     return newArray;
   }
   // 线配置
@@ -196,7 +181,6 @@ const  BottomEcharts = (props) => {
   }
   //关系指向
   function  orientation(allArr) {
-    // console.log('allArr', allArr)
     allArr.map((i,v) => {
       allArr.map((o,p) => {
         if (i.belong === o.name) {
@@ -204,7 +188,6 @@ const  BottomEcharts = (props) => {
         }
       })
     })
-    // console.log('orientationArr', orientationArr)
     return orientationArr
   }
   // 点分布

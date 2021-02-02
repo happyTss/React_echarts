@@ -61,7 +61,7 @@ const  BottomEcharts = (props) => {
       const x = (Math.cos(ang * Math.PI / 180)).toFixed(4) * r;
       const y = (Math.sin(ang * Math.PI / 180)).toFixed(4) * r;
       e.value = [x.toFixed(4), y.toFixed(4)];
-      if (e.belong) {
+  /*     if (e.belong) {
         let rotate = '';
         const angle = (180 / arr.length).toFixed(4);
         // console.log('angle :>> ', angle);
@@ -88,7 +88,7 @@ const  BottomEcharts = (props) => {
           align: x > 0 ? 'left' : 'right',
           padding: x > 0 ? [0, 0, 0, 16] : [0, 16, 0, 0],
         };
-      }
+      } */
       newArray.push(e);
     });
     // console.log('newArray', newArray)
