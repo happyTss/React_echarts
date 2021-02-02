@@ -13,17 +13,17 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 
 const  BottomEcharts = (props) => {
-  const {items,flag} = props
-
-  let [dataArr, allArr, erArr, sanArr,circleLineArr,orientationArr] = [[],[],[],[],[],[]];
+  const {item,flag} = props
+  let items = Object.assign([],item)
+  let [dataArrs, allArrs, erArrs, sanArrs,circleLinesArrs,orientationsArrs] = [[],[],[],[],[],[]];
     // 点
     items.forEach((el, index) => {
     if (el.pointType === "cloud") {
       // 云
       // el.symbol = cloud
       // el.symbolSize = [30, 30];
-      erArr.push(el);
-      // console.log('erArr', erArr)
+      erArrs.push(el);
+      // console.log('erArrs', erArrs)
     } else if (el.pointType === "point") {
       // 球
       // el.symbol = point
@@ -31,9 +31,9 @@ const  BottomEcharts = (props) => {
       if (el.belong && !items.some((iteP) => el.belong === iteP.name)) {
         items.splice(index, 1);
       } else {
-        sanArr.push(el);
+        sanArrs.push(el);
       }
-      // console.log('sanArr', sanArr)
+      // console.log('sanArrs', sanArrs)
     }
     if (!el.belong) {
       el.children = [];
@@ -42,12 +42,12 @@ const  BottomEcharts = (props) => {
           el.children.push(es);
         }
       });
-      allArr.push(el);
+      allArrs.push(el);
     }
   });
 
   // 圆形分区
-  function group(arr, r) {
+  function groups(arr, r) {
     const newArray = [];
     const { length: arLen} = arr;
     // console.log('arr :>> ', arr);
@@ -95,12 +95,12 @@ const  BottomEcharts = (props) => {
     return newArray;
   }
   // 线配置
-  function linesConfig(arr) {
-    const [dataArr, targetCoord] = [ [], [0, 0] ];
+  function linesConfigs(arr) {
+    const [dataArrs, targetCoord] = [ [], [0, 0] ];
     arr.forEach((el) => {
       // console.log('el', el)
       if (!el.belong) {
-        dataArr.push([{
+        dataArrs.push([{
           coord: targetCoord
         },
         {
@@ -116,7 +116,7 @@ const  BottomEcharts = (props) => {
         ]);
         arr.forEach((element) => {
           if (element.belong === el.name) {
-            dataArr.push([{
+            dataArrs.push([{
               coord: el.value
             },
             {
@@ -134,50 +134,50 @@ const  BottomEcharts = (props) => {
         });
       }
     });
-    // console.log('dataArr=====', dataArr)
-    return dataArr;
+    // console.log('dataArrs=====', dataArrs)
+    return dataArrs;
   }
   //环形线绘制
-  function circleLine(erArr,sanArr) {
+  function circleLines(erArrs,sanArrs) {
     let arr = []
-    erArr.map((i,v) => {
-      if (v<erArr.length-1) {
-        circleLineArr.push({source:i.name,target:erArr[v+1].name})
+    erArrs.map((i,v) => {
+      if (v<erArrs.length-1) {
+        circleLinesArrs.push({source:i.name,target:erArrs[v+1].name})
       }else{
-        // circleLineArr.push({source:erArr[v].name,target:erArr[0].name})
+        // circleLinesArrs.push({source:erArrs[v].name,target:erArrs[0].name})
       }
     })
-    sanArr.map((i,v) => {
-      if (v<sanArr.length-1) {
-        circleLineArr.push({source:i.name,target:sanArr[v+1].name})
+    sanArrs.map((i,v) => {
+      if (v<sanArrs.length-1) {
+        circleLinesArrs.push({source:i.name,target:sanArrs[v+1].name})
       }else{
-        // circleLineArr.push({source:sanArr[v].name,target:sanArr[0].name})
+        // circleLinesArrs.push({source:sanArrs[v].name,target:sanArrs[0].name})
       }
     })
-    return circleLineArr
+    return circleLinesArrs
   }
   //关系指向
-  function  orientation(allArr) {
-    // console.log('allArr', allArr)
-    allArr.map((i,v) => {
-      allArr.map((o,p) => {
+  function  orientations(allArrs) {
+    // console.log('allArrs', allArrs)
+    allArrs.map((i,v) => {
+      allArrs.map((o,p) => {
         if (i.belong === o.name) {
-          orientationArr.push({source:o.name,target:i.name})
+          orientationsArrs.push({source:o.name,target:i.name})
         }
       })
     })
-    // console.log('orientationArr', orientationArr)
-    return orientationArr
+    // console.log('orientationsArrs', orientationsArrs)
+    return orientationsArrs
   }
   // 点分布
-  erArr = group(erArr, 35);
-  // console.log('erArr', erArr)
-  sanArr = group(sanArr, 70);
-  allArr = [...erArr, ...sanArr];
+  erArrs = groups(erArrs, 35);
+  // console.log('erArrs', erArrs)
+  sanArrs = groups(sanArrs, 70);
+  allArrs = [...erArrs, ...sanArrs];
   // 线坐标和配置
-  dataArr = linesConfig(allArr);
-  circleLineArr = circleLine(erArr,sanArr)
-  orientationArr = orientation(allArr)
+  dataArrs = linesConfigs(allArrs);
+  circleLinesArrs = circleLines(erArrs,sanArrs)
+  orientationsArrs = orientations(allArrs)
 	useEffect(() => {
 		const myChart = echarts.init(document.getElementById('lines'));
 		const option = {
@@ -218,7 +218,7 @@ const  BottomEcharts = (props) => {
 					trailLength: 0, // 拖尾的长度
 					symbol: 'pin', // 动画的类型
 				},
-				data: dataArr,
+				data: dataArrs,
       },
       {
         type: "graph",
@@ -234,8 +234,8 @@ const  BottomEcharts = (props) => {
 						shadowColor: "none",
 					},
 				},
-        data: allArr,
-        edges: circleLineArr
+        data: allArrs,
+        edges: circleLinesArrs
 			},
 			],
     }
@@ -252,7 +252,7 @@ const  BottomEcharts = (props) => {
   }, [])
   return(
     <div style={{position:'absolute',top:'0',left:'0',height: '1000px',overflow:'hidden',zIndex:'2',display: flag ?'block':'none'}}>
-      <div id="lines" style={{	width: '1800px',height: '1800px'}} ></div>
+      <div id="lines" style={{	width: '1800px',height: '1800px',display: flag ?'block':'none'}} ></div>
     </div>
   )
 }

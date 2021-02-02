@@ -14,7 +14,6 @@ import 'echarts/lib/component/title';
 
 const  BottomEcharts = (props) => {
   const [bgColor,setbgColor] = useState('rgba(0,0,0,0)')
-
   const {items,setFlag} = props
 
   let [dataArr, allArr, erArr, sanArr,circleLineArr,orientationArr] = [[],[],[],[],[],[]];
@@ -89,43 +88,33 @@ const  BottomEcharts = (props) => {
       e.value = [x.toFixed(4), y.toFixed(4)];
       if (e.belong) {
         // :TODO:角度需要重新计算
-        let rotate = '';
+        let rotate = '0';
         const angle = (180 / arr.length).toFixed(4);
-        console.log('angle', angle)
-        if (x > 0 && y >= 0) {
+        if (x==0) {
+          console.log('ang======', ang)
+          console.log('arr[index]', arr[index])
+        }
+        if (x > 0 ) {
           rotate = (r - angle * (index-1)).toFixed(4);
           // rotate = (90 - 360 / arr.length * (index + 1)).toFixed(4);
-        } else if (x <= 0 && y > 0) {
-          
+        } else if (x <= 0 ) {
           rotate = (-r + angle * (arr.length - index + 1)).toFixed(4);
-        } else if (x < 0 && y <= 0) {
-          console.log('111111111111111111111')
-          rotate = (r - angle * (index - arr.length * 0.5)).toFixed(4);
-        } else if (x >= 0 && y < 0) {
-          rotate = (-8 + angle * (arr.length * 0.25 - index -1)).toFixed(4);
-        }
+        } 
         console.log('rotate :>> ', rotate);
-        // if (0<rotate && rotate<90) {
-        //   console.log('222222222222222222')
-        //   rotate = rotate *0.1
-        // }else if (-45 < rotate&& rotate < 0) {
-        //   console.log('11111111111')
-        //   rotate = - rotate * 2
-        // }
         e.label = {
             normal: {
             show: true,
             position: "bottom",
             // borderWidth: 1,
             // borderRadius: 12,
-            padding: [4, 8, 4, 8],
-            distance: 4,
+            // padding: [4, 8, 4, 8],
+            distance: 2,
             color: "rgb(89,197,238)",
             borderColor: "rgb(89,197,238)",
             // rotate: rotate*0.1,
-            rotate:angle * 2,
+            rotate:x > 0 ? ang : -(180 - ang ),
             align: x > 0 ? 'left' : 'right',
-            padding: x > 0 ? [-20, 20, 0, 20] : [-40, 16, 0, 0],
+            padding: x > 0 ? [-15, 13,0, 30] : [-15, 30, 10, 0],//
           },
           // show: true,
           // width: 200,

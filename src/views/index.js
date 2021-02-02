@@ -504,7 +504,7 @@ const Echarts = () => {
 
   return (
     <div style={{position:'relative',background:'#000'}}>
-      <BottomEcharts items = {items} flag= {flag}/>
+      <BottomEcharts item = {items} flag= {flag}/>
       <TopEcharts items = {items} setFlag={setFlag}/>
     </div>
   )
