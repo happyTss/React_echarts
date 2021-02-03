@@ -3,7 +3,7 @@ import React, {
 	useState
 } from 'react';
 import {cloud,point} from './base'
-
+import './chart.css'
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/lines';
@@ -11,6 +11,7 @@ import 'echarts/lib/chart/graph';
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
+import plantsss from './plant.png'
 
 const  BottomEcharts = (props) => {
   const [bgColor,setbgColor] = useState('rgba(0,0,0,0)')
@@ -27,12 +28,12 @@ const  BottomEcharts = (props) => {
         normal: {
           show: true,
           position: "bottom",
-          borderWidth: 1,
+          // borderWidth: 1,
           borderRadius: 12,
           padding: [4, 8, 4, 8],
           distance: 4,
-          color: "rgb(89,197,238)",
-          borderColor: "rgb(89,197,238)",
+          color: "#666666",
+          // borderColor: "rgb(89,197,238)",
         },
       };
       erArr.push(el);
@@ -55,8 +56,8 @@ const  BottomEcharts = (props) => {
       // };
       el.itemStyle = {
         borderColor: el.pointColor ? el.pointColor : 'rgba(4, 242, 28, 1)',
-        borderWidth: 3,
-        color: "#0ceffd",
+        borderWidth: 1,
+        color: "#666666",
       };
       if (el.belong && !items.some((iteP) => el.belong === iteP.name)) {
         items.splice(index, 1);
@@ -86,7 +87,7 @@ const  BottomEcharts = (props) => {
       const x = (Math.cos(ang * Math.PI / 180)).toFixed(4) * r;
       const y = (Math.sin(ang * Math.PI / 180)).toFixed(4) * r;
       e.value = [x.toFixed(4), y.toFixed(4)];
-      if (e.belong) {
+      // if (e.belong) {
         // :TODO:角度需要重新计算
         let rotate = '0';
         const angle = (180 / arr.length).toFixed(4);
@@ -104,14 +105,33 @@ const  BottomEcharts = (props) => {
             // borderRadius: 12,
             // padding: [4, 8, 4, 8],
             distance: 2,
-            color: "rgb(89,197,238)",
+            color: "#666666",
             borderColor: "rgb(89,197,238)",
             // rotate: rotate*0.1,
             rotate:x > 0 ? ang : -(180 - ang ),
             align: x > 0 ? 'left' : 'right',
             padding: x > 0 ? [-15, 13,0, 30] : [-15, 30, 10, 0],//
           },
-        };
+          
+        // };
+      }
+      if (!e.belong) {
+        e.label={
+          normal: {
+            show: true,
+            position: "bottom",
+            // borderWidth: 1,
+            // borderRadius: 12,
+            // padding: [4, 8, 4, 8],
+            distance: 2,
+            color: "#666666",
+            borderColor: "rgb(89,197,238)",
+            // rotate: rotate*0.1,
+            rotate:x > 0 ? ang : -(180 - ang ),
+            align: x < 0 ? 'left' : 'right',
+            padding: x > 0 ? [-15, 13,0, 30] : [-10, 30, 50, 13],//
+          },
+        }
       }
       newArray.push(e);
     });
@@ -145,7 +165,7 @@ const  BottomEcharts = (props) => {
             },
             {
               coord: element.value,
-              lineStyle: element.lineStyle,
+              // lineStyle: element.lineStyle,
               effect: {
                 symbolSize: [4, 8], // 动画的大小
                 period: 6, // 时间快慢
@@ -258,8 +278,10 @@ const  BottomEcharts = (props) => {
 		})
   }, [])
   return(
-    <div style={{position:'absolute',top:'0',left:'0',height: '1000px',overflow:'hidden',zIndex:'9'}}>
-      <div id="graph" style={{	width: '1800px',height: '1800px',background:bgColor}} ></div>
+    <div className="wrapper">
+      <div id="graph" className="echarts"></div>
+      <img src={plantsss} className="plant"/>
+      <div className="info">数据总量:1800</div>
     </div>
   )
 }

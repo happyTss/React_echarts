@@ -1,0 +1,11 @@
+.box{
+  position: relative;
+  background: #000;
+}
+.list{
+  position: absolute;
+  top: 10PX;
+  right: 10PX;
+  /* color: #fff; */
+  z-index: 2;
+}

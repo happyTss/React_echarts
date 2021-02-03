@@ -4,8 +4,7 @@ import React, {
 	useEffect,
 	useState
 } from 'react';
-
-
+import './index.css'
 
 const Echarts = () => {
   const [flag,setFlag] = useState(true)
@@ -499,13 +498,22 @@ const Echarts = () => {
     },
   },
   ]
+  const dataSource = [ '数据治理', '数据集成','数据汇聚']
+  const item = Object.assign([],items)
 
-
+  const List = () => {
+    return(
+      <div className="list">
+        {dataSource.map(i=><div>{i}</div>)}
+      </div>
+    )
+  }
 
   return (
-    <div style={{position:'relative',background:'#000'}}>
-      <BottomEcharts item = {items} flag= {flag}/>
+    <div className="box">
+      <BottomEcharts item = {item} flag= {flag}/>
       <TopEcharts items = {items} setFlag={setFlag}/>
+      <List/>
     </div>
   )
 }

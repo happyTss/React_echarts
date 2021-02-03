@@ -208,8 +208,8 @@ const  BottomEcharts = (props) => {
 				polyline: true,
 				z: 1,
 				lineStyle: {
-					width: 2,
-					color: '#99CCCC',
+					width: 1,
+					color: '#666',
 					curveness: 0,
 				},
 				effect: {
@@ -251,8 +251,8 @@ const  BottomEcharts = (props) => {
 
   }, [])
   return(
-    <div style={{position:'absolute',top:'0',left:'0',height: '1000px',overflow:'hidden',zIndex:'2',display: flag ?'block':'none'}}>
-      <div id="lines" style={{	width: '1800px',height: '1800px',display: flag ?'block':'none'}} ></div>
+    <div className="wrapper" style={{zIndex:'2',display: flag ?'block':'none'}}>
+      <div id="lines" className="echarts" style={{display: flag ?'block':'none'}} ></div>
     </div>
   )
 }

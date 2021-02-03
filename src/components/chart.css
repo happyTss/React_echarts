@@ -1,0 +1,29 @@
+.wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 800px;
+  overflow: hidden;
+  z-index: 9;
+}
+.echarts{
+  width: 1400px;
+  height: 1400px;
+}
+.plant{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.info{
+  position: absolute;
+  bottom: 100px;
+  color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 900;
+}
